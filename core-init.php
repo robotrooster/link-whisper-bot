@@ -13,6 +13,7 @@ define('LWB_CORE_INC',dirname( __FILE__ ).'/assets/inc/');
 define('LWB_CORE_IMG',plugins_url( 'assets/img/', __FILE__ ));
 define('LWB_CORE_CSS',plugins_url( 'assets/css/', __FILE__ ));
 define('LWB_CORE_JS',plugins_url( 'assets/js/', __FILE__ ));
+
 /*
 *
 *  Register CSS
