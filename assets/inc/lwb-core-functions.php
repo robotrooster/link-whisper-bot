@@ -85,6 +85,8 @@ if( !function_exists("lwb_info_page") ) {
                 // print_r($keywords);
 
                 getInternalLinks($lwbinfo[1], time()); 
+                // getInternalLinks($lwbinfo[2], time()); 
+                // getInternalLinks($lwbinfo[3], time()); 
 
                 // print_r($keyword_sources);
             } 

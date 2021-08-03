@@ -4,6 +4,8 @@
 /*
 Jquery Ready!
 */
+console.log("LOADED LWB")
+
 jQuery(document).ready(function($){
     "use strict";
     /*

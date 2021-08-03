@@ -1,4 +1,4 @@
-<table class="wp-list-table widefat fixed striped posts tbl_keywords_x js-table wpil-inbound-links best_keywords inbound" id="tbl_keywords">
+<table class="hidden wp-list-table widefat fixed striped posts tbl_keywords_x js-table wpil-inbound-links best_keywords inbound" id="tbl_keywords">
     <?php   $options = get_user_meta(get_current_user_id(), 'report_options', true); 
             $show_date = (!empty($options['show_date']) && $options['show_date'] == 'on') ? true : false;
             $taxonomies = get_taxonomies(array('public' => true, 'show_ui' => true), 'names', 'or');
@@ -24,10 +24,11 @@
             </tr>
         </thead>
         <tbody id="the-list">
+            <h3>There are <?php echo count($groups) ?> groups</h3>
         <?php foreach ($groups as $post_id => $group) : $phrase = $group[0]; ?>
-            <tr class="wpil-inbound-sentence" data-wpil-sentence-id="<?=esc_attr($post_id)?>" data-wpil-post-published-date="<?php echo strtotime(get_the_date('F j, Y', $post_id)); ?>">
+            <tr class="wpil-inbound-sentence hidden" data-wpil-sentence-id="<?=esc_attr($post_id)?>" data-wpil-post-published-date="<?php echo strtotime(get_the_date('F j, Y', $post_id)); ?>">
                 <td class="inbound-checkbox" data-colname="<?php _e('Check Link', 'wpil'); ?>">
-                    <input type="checkbox" name="link_keywords[]" class="chk-keywords" wpil-link-new="">
+                    <input type="checkbox" name="link_keywords[]" class="chk-keywords" wpil-link-new="" checked="checked">
                 </td>
                 <td class="sentences" data-colname="<?php _e('Phrase', 'wpil'); ?>">
                     <?php if (count($group) > 1) : ?>
