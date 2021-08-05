@@ -1,5 +1,5 @@
 <?php if (!empty($phrases)){ ?>
-    <h3>Found  <?php echo count($phrases) ?> phrases</h3>
+    <!-- <h3>Found  <?php echo count($phrases) ?> phrases</h3> -->
     <?php } ?>
 <form method="post" action="">
     <!-- <div id="wpil-inbound-suggestions-head-controls">
@@ -99,14 +99,16 @@
             <button id="inbound_suggestions_button" class="sync_linking_keywords_list button-primary" data-id="< ?=esc_attr($post->id)?>" data-type="<?=esc_attr($post->type)?>" data-page="inbound">Add links</button>
         < ?php } ?>
         < ?php $same_category = !empty(get_user_meta(get_current_user_id(), 'wpil_same_category_selected', true)); ?-->
-    </div>
-    <h2>Pfrrrt..</h2>
-    <div class="suggestion-box">
-        <?php require LWB_CORE_INC . 'table_inbound_suggestions.php'?>
+    <!-- </div> -->
+    <!-- <h2>Pfrrrt..</h2> -->
+    
         <?php if (!empty($phrases)){ ?>
-        <button id="inbound_suggestions_button_2" class="sync_linking_keywords_list button-primary" data-id="<?=esc_attr($post->id)?>" data-type="<?=esc_attr($post->type)?>" data-page="inbound">Add links</button>
+            <div class="suggestion-box">
+            <?php require LWB_CORE_INC . 'table_inbound_suggestions.php'?>
+            <button id="inbound_suggestions_button_2" class="sync_linking_keywords_list button-primary" data-id="<?=esc_attr($post->id)?>" data-type="<?=esc_attr($post->type)?>" data-page="inbound">Add links</button>
+            </div>
         <?php } ?>
-        </div>
+
 </form>
 
 <style>

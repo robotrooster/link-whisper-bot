@@ -9,7 +9,7 @@
     <?php if (!empty($groups)) : ?>
         <thead>
             <tr class="wpil-suggestion-table-heading">
-                <th class="inbound-check-all-col"><input type="checkbox" id="select_all" class="suggestion-select-all"><b style="margin: 0 0 0 5px;">Check All</b></th>
+                <th class="inbound-check-all-col"><input type="checkbox" class="suggestion-select-all"><b style="margin: 0 0 0 5px;">Check All</b></th>
                 <th><b>Suggested Phrases</b></th>
                 <th><b>Posts To Create Links In</b></th>
                 <?php
@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody id="the-list">
-            <h3>There are <?php echo count($groups) ?> groups</h3>
+            <h3>There are <?php echo count($groups) ?> suggestions for "<em><?php echo $post->title ?></em>"</h3>
         <?php foreach ($groups as $post_id => $group) : $phrase = $group[0]; ?>
             <tr class="wpil-inbound-sentence hidden" data-wpil-sentence-id="<?=esc_attr($post_id)?>" data-wpil-post-published-date="<?php echo strtotime(get_the_date('F j, Y', $post_id)); ?>">
                 <td class="inbound-checkbox" data-colname="<?php _e('Check Link', 'wpil'); ?>">

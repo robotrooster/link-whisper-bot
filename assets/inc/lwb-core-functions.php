@@ -7,13 +7,14 @@
 *	
 */
 // If this file is called directly, abort. //
+set_time_limit(0);
 if ( ! defined( 'WPINC' ) ) {die;} // end if
 /*
 *
 * Custom Front End Ajax Scripts / Loads In WP Footer
 *
 */
-global $lwbinfo;
+// global $lwbinfo;
 function lwb_frontend_ajax_form_scripts(){
 ?>
 <script type="text/javascript">
@@ -76,6 +77,7 @@ if( !function_exists("lwb_info_page") ) {
         <?php 
                 $orphans = str_replace(" AND p.ID IN (", "", Wpil_Query::reportPostIds(true, $hide_noindex));
                 $lwbinfo = explode(",",substr($orphans, 0, -1));
+                // $lwbinfo = explode(",",substr($orphans, 0, -1));
 
                 // $keywords = Wpil_TargetKeyword::get_keywords_by_post_ids($lwbinfo, "post");
                 // $keyword_sources = Wpil_TargetKeyword::get_active_keyword_sources();
@@ -83,11 +85,29 @@ if( !function_exists("lwb_info_page") ) {
                 // $lwbinfo = ["pfrt","brrt"]; 
                 // print_r($lwbinfo);
                 // print_r($keywords);
+                shuffle($lwbinfo);
+                
+                for($i = 0; $i < 5; $i++){ 
+ 
+                    getInternalLinks($lwbinfo[$i], $lwbinfo[$i]); 
+                    // getInternalLinks($lwbinfo[1], $lwbinfo[1]); 
+                    // getInternalLinks($lwbinfo[2], $lwbinfo[2]); 
+                    // getInternalLinks($lwbinfo[3], $lwbinfo[3]); 
+                    // getInternalLinks($lwbinfo[4], $lwbinfo[4]); 
 
-                getInternalLinks($lwbinfo[1], time()); 
-                // getInternalLinks($lwbinfo[2], time()); 
-                // getInternalLinks($lwbinfo[3], time()); 
-
+                }
+                // foreach($lwbinfo as $lb){
+                //     $count = 0;
+                //     $count++;
+                //     getInternalLinks($lb, $lb);
+                //     // if($return !== false){
+                //     //     $count++;
+                //     //     echo $return;
+                //     // }
+                //     if($count === 1){
+                //         break;
+                //     }
+                // }
                 // print_r($keyword_sources);
             } 
         
@@ -98,7 +118,7 @@ function getInternalLinks($post_id, $key){
             $phrases = [];
             $memory_break_point = Wpil_Report::get_mem_break_point();
             $ignore_posts = Wpil_Settings::getIgnorePosts();
-            $batch_size = Wpil_Settings::getProcessingBatchSize();
+            $batch_size = 500;
 
             $post = new Wpil_Model_Post($post_id);
             
@@ -181,6 +201,9 @@ function getInternalLinks($post_id, $key){
                     Wpil_Phrase::TitleKeywordsCheck($temp_phrases, $keyword);
                     $phrases = array_merge($phrases, $temp_phrases);
                 }
+                if (!count($temp_phrases)){
+                    return;
+                }
             }
 
             // get the suggestions transient
@@ -222,13 +245,15 @@ function getInternalLinks($post_id, $key){
                     'posts_processed' => $process_count,
             );
 
+
             if(!empty($phrases)){
                 $processing_status['status'] = 'has_suggestions';
+                
             }
 
             //wp_send_json($processing_status);
-            echo "<h2>Processing ".$post_id."</h2>";
-            print_r($processing_status);
+            // echo "<h2>Processing ".$post_id."</h2>";
+            // print_r($processing_status);
 
             $phrases = get_transient('wpil_post_suggestions_' . $key);
             // decompress the suggestions
