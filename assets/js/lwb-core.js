@@ -4,7 +4,7 @@
 /*
 Jquery Ready!
 */
-console.log("LOADED LWB")
+
 
 jQuery(document).ready(function($){
     "use strict";
@@ -18,9 +18,6 @@ jQuery(document).ready(function($){
     *   clicked the same element will get the class "active".
     *
     */
-    $('#mySpecialButton').click(function(){
-        $(this).addClass('active');    
-    });
-    
+
     // End basic front-end scripts here
 });

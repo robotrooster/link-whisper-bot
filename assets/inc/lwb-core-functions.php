@@ -72,43 +72,22 @@ function lwb_menu(){
 
 if( !function_exists("lwb_info_page") ) { 
     function lwb_info_page(){ 
-        ?>   <h1>Info</h1> 
-
+        ?>   
         <?php 
+                 include LWB_CORE_INC . 'main.php'; 
+
                 $orphans = str_replace(" AND p.ID IN (", "", Wpil_Query::reportPostIds(true, $hide_noindex));
                 $lwbinfo = explode(",",substr($orphans, 0, -1));
-                // $lwbinfo = explode(",",substr($orphans, 0, -1));
 
-                // $keywords = Wpil_TargetKeyword::get_keywords_by_post_ids($lwbinfo, "post");
-                // $keyword_sources = Wpil_TargetKeyword::get_active_keyword_sources();
-
-                // $lwbinfo = ["pfrt","brrt"]; 
-                // print_r($lwbinfo);
-                // print_r($keywords);
                 shuffle($lwbinfo);
                 
-                for($i = 0; $i < 5; $i++){ 
+                for($i = 0; $i < 10; $i++){ 
  
                     getInternalLinks($lwbinfo[$i], $lwbinfo[$i]); 
-                    // getInternalLinks($lwbinfo[1], $lwbinfo[1]); 
-                    // getInternalLinks($lwbinfo[2], $lwbinfo[2]); 
-                    // getInternalLinks($lwbinfo[3], $lwbinfo[3]); 
-                    // getInternalLinks($lwbinfo[4], $lwbinfo[4]); 
+
 
                 }
-                // foreach($lwbinfo as $lb){
-                //     $count = 0;
-                //     $count++;
-                //     getInternalLinks($lb, $lb);
-                //     // if($return !== false){
-                //     //     $count++;
-                //     //     echo $return;
-                //     // }
-                //     if($count === 1){
-                //         break;
-                //     }
-                // }
-                // print_r($keyword_sources);
+
             } 
         
         } 
@@ -118,7 +97,7 @@ function getInternalLinks($post_id, $key){
             $phrases = [];
             $memory_break_point = Wpil_Report::get_mem_break_point();
             $ignore_posts = Wpil_Settings::getIgnorePosts();
-            $batch_size = 500;
+            $batch_size = 20;
 
             $post = new Wpil_Model_Post($post_id);
             
@@ -279,7 +258,7 @@ function getInternalLinks($post_id, $key){
                 }
             }
             // include WP_INTERNAL_LINKING_PLUGIN_DIR . '/templates/inbound_suggestions_page_container.php';
-            include LWB_CORE_INC . 'inbound_suggestions_page_container.php';
+            include LWB_CORE_INC . 'inbound_suggestions_page_container.php'; 
             Wpil_Suggestion::clearSuggestionProcessingCache($key, $post->id);
 
 }

@@ -105,11 +105,13 @@
         <?php if (!empty($phrases)){ ?>
             <div class="suggestion-box">
             <?php require LWB_CORE_INC . 'table_inbound_suggestions.php'?>
-            <button id="inbound_suggestions_button_2" class="sync_linking_keywords_list button-primary" data-id="<?=esc_attr($post->id)?>" data-type="<?=esc_attr($post->type)?>" data-page="inbound">Add links</button>
+            <button class="sync_linking_keywords_list_custom button-primary" data-id="<?=esc_attr($post->id)?>" data-type="<?=esc_attr($post->type)?>" data-page="inbound">Add links</button>
             </div>
         <?php } ?>
 
 </form>
+
+
 
 <style>
     .suggestion-box{
